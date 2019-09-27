@@ -22,5 +22,5 @@ type Response struct {
 
 type Result struct {
 	Labels []string `json:"labels"`
-	Data   [][]json.Number
+	Data   [][]json.Number `json:"data"`
 }

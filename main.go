@@ -66,6 +66,7 @@ func main() {
 			res, err := getChart(chart)
 			if err != nil {
 				log.Printf("Failed to get chart %s: %s", chart, err)
+				continue
 			}
 			if err := pushChart(res); err != nil {
 				log.Printf("Failed to push chart %s: %s", chart, err)

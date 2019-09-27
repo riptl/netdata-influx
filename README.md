@@ -10,7 +10,7 @@
 
 #### [Demo Page](https://the-eye.terorie.dev/d/SwC1MrpWz/netdata-monitoring)
 
-![Screenshot](https://grafana.com/api/dashboards/10922/images/6901/image)
+![Screenshot](https://grafana.com/api/dashboards/10922/images/6902/image)
 
 ### Quickstart
 

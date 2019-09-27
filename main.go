@@ -135,7 +135,7 @@ func pushChart(res *netdata.Response) error {
 	host := viper.GetString(ConfHostTag)
 
 	// Fill batch with data
-	for _, row := range res.Result.Data {
+	for rowNr, row := range res.Result.Data {
 		if len(row) != nCols {
 			return fmt.Errorf("malformed row")
 		}
@@ -150,9 +150,15 @@ func pushChart(res *netdata.Response) error {
 			if i == timeIndex {
 				continue
 			}
-			val, err := col.Float64()
-			if err != nil {
-				return fmt.Errorf("invalid data value: %s", err)
+			var val float64
+			if col == "" {
+				val = 0
+			} else {
+				val, err = col.Float64()
+				if err != nil {
+					log.Printf("Chart %s: invalid data value at row %d: %s", res.ID, rowNr, err)
+					continue
+				}
 			}
 			tags := map[string]string{
 				"host": host,

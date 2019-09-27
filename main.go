@@ -131,10 +131,7 @@ func pushChart(res *netdata.Response) error {
 		return err
 	}
 
-	// Tags for points
-	tags := map[string]string{
-		"host": viper.GetString(ConfHostTag),
-	}
+	host := viper.GetString(ConfHostTag)
 
 	// Fill batch with data
 	for _, row := range res.Result.Data {
@@ -147,8 +144,7 @@ func pushChart(res *netdata.Response) error {
 		if err != nil { return err }
 		timestamp := time.Unix(unix, 0)
 
-		// Create a field value for each dimension
-		fields := make(map[string]interface{})
+		// Create a point for each dimension
 		for i, col := range row {
 			if i == timeIndex {
 				continue
@@ -157,13 +153,17 @@ func pushChart(res *netdata.Response) error {
 			if err != nil {
 				return fmt.Errorf("invalid data value: %s", err)
 			}
-			fields[res.Result.Labels[i]] = val
+			tags := map[string]string{
+				"host": host,
+				"dimension": res.Result.Labels[i],
+			}
+			fields := map[string]interface{}{
+				"value": val,
+			}
+			point, err := client.NewPoint(res.ID, tags, fields, timestamp)
+			if err != nil { return err }
+			batch.AddPoint(point)
 		}
-
-		// Create a point named netdata
-		point, err := client.NewPoint(res.ID, tags, fields, timestamp)
-		if err != nil { return err }
-		batch.AddPoint(point)
 	}
 
 	// Write batch

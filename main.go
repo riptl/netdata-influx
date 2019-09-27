@@ -22,11 +22,13 @@ const (
 	ConfNetdata = "netdata_api"
 	ConfHostTag = "host_tag"
 	ConfCharts = "charts"
+	ConfPoints = "points"
 )
 
 func main() {
 	viper.SetDefault(ConfRefresh, 10 * time.Second)
 	viper.SetDefault(ConfLogTimestamps, true)
+	viper.SetDefault(ConfPoints, 0)
 	viper.SetDefault(ConfCharts, []string{
 		"system.cpu",
 		"system.net",
@@ -76,6 +78,7 @@ func getChart(chart string) (*netdata.Response, error) {
 	builder := netdata.RequestBuilder{
 		BaseURL: viper.GetString(ConfNetdata),
 		Chart:   chart,
+		Points:  viper.GetInt(ConfPoints),
 	}
 	req, err := builder.Build()
 	if err != nil {

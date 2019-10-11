@@ -80,6 +80,7 @@ func getChart(chart string) (*netdata.Response, error) {
 		BaseURL: viper.GetString(ConfNetdata),
 		Chart:   chart,
 		Points:  viper.GetInt(ConfPoints),
+		After:   -viper.GetInt(ConfPoints),
 	}
 	req, err := builder.Build()
 	if err != nil {

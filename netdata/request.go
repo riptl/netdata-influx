@@ -13,6 +13,8 @@ type RequestBuilder struct {
 	Chart string
 	// Number of points
 	Points int
+	// Start range
+	After int
 }
 
 func (b *RequestBuilder) Build() (*http.Request, error) {
@@ -27,6 +29,9 @@ func (b *RequestBuilder) Build() (*http.Request, error) {
 	v.Set("options", "absolute|jsonwrap")
 	if b.Points != 0 {
 		v.Set("points", strconv.Itoa(b.Points))
+	}
+	if b.After != 0 {
+		v.Set("after", strconv.Itoa(b.After))
 	}
 	u.RawQuery = v.Encode()
 	return http.NewRequest("GET", u.String(), nil)

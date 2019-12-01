@@ -29,7 +29,7 @@ wget https://raw.githubusercontent.com/terorie/netdata-influx/master/quickstart/
 docker-compose up -d
 
 # Create netdata database
-curl -G http://localhost:8086/query --data-urlencode "q=CREATE DATABASE netdata"
+curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE netdata"
 ```
 
 **Grafana:**

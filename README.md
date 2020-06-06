@@ -37,7 +37,7 @@ curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE n
  - Visit `http://<your_ip>:3000`
  - Login with `admin:admin`
  - Add InfluxDB datasource
-    - URL: `http://influxdb:8086`
+    - URL: `http://influxdb:8086`, or with auth `http://user:pass@influxdb:8086`
     - Details > Database: `netdata`
  - Import dashboard with ID `10922` [(help)](https://grafana.com/docs/reference/export_import/)
 

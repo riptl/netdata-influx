@@ -3,7 +3,7 @@ module github.com/terorie/netdata-influx
 go 1.13
 
 require (
-	github.com/influxdata/influxdb v1.8.3
+	github.com/influxdata/influxdb v1.8.4
 	github.com/pelletier/go-toml v1.6.0 // indirect
 	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/cast v1.3.1 // indirect

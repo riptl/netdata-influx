@@ -31,7 +31,7 @@ services:
       - '3000:3000'
     restart: always
   netdata-grabber:
-    image: terorie/netdata-influx
+    image: ghcr.io/terorie/netdata-influx:main
     environment:
       - NI_INFLUX_ADDR=http://influxdb:8086
       - NI_INFLUX_DB=netdata

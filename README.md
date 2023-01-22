@@ -16,6 +16,12 @@
 
 Install InfluxDB, Netdata and Grafana using [Docker Compose](https://docs.docker.com/compose/install/) in under a minute!
 
+**GitHub Container Registry**
+
+A pre-built lightweight Docker image is available here: 
+
+[`ghcr.io/terorie/netdata-influx`](https://github.com/terorie/netdata-influx/pkgs/container/netdata-influx)
+
 **Console:**
 
 ```sh
